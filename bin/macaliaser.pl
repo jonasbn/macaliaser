@@ -226,27 +226,18 @@ suggested alias in path.
 
 B<create_alias> is used to create the actual alias.
 
-=head1 TODO
-
-=over 4
-
-=item *
-
-Need to be able to migrate the aliases so they can be used from bash.
-
-=back
-
 =head1 AUTHOR
 
 jonasbn E<lt>jonasbn@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-macaliaser.pl is free software and is released under the Artistic
-License. See <http://www.perl.com/lan- guage/misc/Artistic.html> for
-details.
-
-macaliaser.pl is (C) 2004 Jonas B. Nielsen (jonasbn)
+macaliaser.pl is (C) 2004-2014 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
+
+=head1 LICENSE
+
+macaliaser.pl is free software and is released under the Artistic
+License 2.0.
 
 =cut
