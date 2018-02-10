@@ -1,138 +1,152 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 
 # $Id: macaliaser.pl 1303 2004-05-12 18:21:02Z jonasbn $
 
 use strict;
+use warnings;
 use Getopt::Std;
 use File::Which qw(which);
 use File::Find qw(find);
 use vars qw(%opts $VERSION);
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
-getopts('hvil:', \%opts);
+getopts( 'hvil:', \%opts );
 
 my %aliases;
 my $verbose = 0;
 
 $verbose = 1 if $opts{v};
 
-if ($opts{h} or not (keys %opts)) {
-	&help();
+if ( $opts{h} or not( keys %opts ) ) {
+    &help();
 }
 
-if ($opts{i}) {
-	my @directories_to_search = @ARGV;
-	find(\&is_app, @directories_to_search);
-} elsif ($opts{l}) {
-	open(FIN, "<$opts{l}")
-		or die ("Unable to open file: $opts{l} - $!");
-	while (<FIN>) {
+if ( $opts{i} ) {
+    my @directories_to_search = @ARGV;
+    find( \&is_app, @directories_to_search );
+}
+elsif ( $opts{l} ) {
+    open( FIN, "<$opts{l}" )
+        or die("Unable to open file: $opts{l} - $!");
+    while (<FIN>) {
         if (m[^alias (\w+).*/(.*\.app)'$]) {
-                print "$1 -> $2\n";
+            print "$1 -> $2\n";
         }
     }
-	close(FIN);
+    close(FIN);
 }
 
 exit(0);
 
 sub help {
-	print STDERR "Usage: $0 [options]\n";
-	print STDERR "\toptions:\n";
-	print STDERR "\t-h : this help message\n";
-	print STDERR "\t-i <path> : the path to search for applications\n";
-	print STDERR "\t-l <aliases file> : the file which contains your aliases\n";
-	print STDERR "\tthe option prints a simple report, showing existing aliases\n";
+    print STDERR "Usage: $0 [options]\n";
+    print STDERR "\toptions:\n";
+    print STDERR "\t-h : this help message\n";
+    print STDERR "\t-i <path> : the path to search for applications\n";
+    print STDERR
+        "\t-l <aliases file> : the file which contains your aliases\n";
+    print STDERR
+        "\tthe option prints a simple report, showing existing aliases\n";
 
-	exit(0);
+    exit(0);
 }
 
 sub is_app {
-		 
-	if (m/^(.*\.app)$/) {		
-		my $app = $1;
-		
-		print STDERR "located: $app\n" if $verbose;
 
-		my $try = 0;
-		for(1 .. 3) {
-			my $alias = &suggest($app, $try++);
-			if (&cmd_exists($alias)) {
-				next;
-			} else {
-				&create_alias($alias, $File::Find::name, \%aliases);
-				last;
-			}
-		}
-	}
+    if (m/^(.*\.app)$/) {
+        my $app = $1;
+
+        print STDERR "located: $app\n" if $verbose;
+
+        my $try = 0;
+        for ( 1 .. 3 ) {
+            my $alias = &suggest( $app, $try++ );
+            if ( &cmd_exists($alias) ) {
+                next;
+            }
+            else {
+                &create_alias( $alias, $File::Find::name, \%aliases );
+                last;
+            }
+        }
+    }
 }
 
 sub suggest {
-	my ($name, $try) = @_;
+    my ( $name, $try ) = @_;
 
-	if ($try == 0) {
-		$name =~ tr/[A-Z]/[a-z]/;  #lower casing
-		$name =~ s/^(.*)\.app$/$1/; #extracting short name
-		                           #trying shortname
-	} elsif ($try == 1) {
-		$name =~ tr/[A-Z]/[a-z]/;  #lower casing
-							       #trying fullname
-	} elsif ($try == 1) {
-		$name = ucfirst($name);    #upper casing 1st letter
-								   #trying with 1st letter uc
-	} else {
-		#nothing to do (yet)       #trying with original name
-	}
-	$name =~ s/\W+//g;
+    if ( $try == 0 ) {
+        $name =~ tr/[A-Z]/[a-z]/;      #lower casing
+        $name =~ s/^(.*)\.app$/$1/;    #extracting short name
+                                       #trying shortname
+    }
+    elsif ( $try == 1 ) {
+        $name =~ tr/[A-Z]/[a-z]/;      #lower casing
+                                       #trying fullname
+    }
+    elsif ( $try == 1 ) {
+        $name = ucfirst($name);        #upper casing 1st letter
+                                       #trying with 1st letter uc
+    }
+    else {
+        #nothing to do (yet)       #trying with original name
+    }
+    $name =~ s/\W+//g;
 
-	print STDERR "suggesting $name ($try)\n" if $verbose;
-	
-	return $name;
+    print STDERR "suggesting $name ($try)\n" if $verbose;
+
+    return $name;
 }
 
 sub cmd_exists {
-	my $suggestion = shift;
-	
-	my $rv = which($suggestion);
-	
-	return $rv;
+    my $suggestion = shift;
+
+    my $rv = which($suggestion);
+
+    return $rv;
 }
 
 sub create_alias {
-	my ($alias, $app, $list) = @_;
+    my ( $alias, $app, $list ) = @_;
 
-	print STDERR "Creating alias $alias\n" if $verbose;
-	
-	$app =~ s/( )/\\$1/g;
-	$app =~ s/(')/\\$1/g;
-		
-	$list->{$alias} = $app;
+    print STDERR "Creating alias $alias\n" if $verbose;
 
-	print "alias $alias=\"open -a $app\"\n";
-	
-	return 1;
+    $app =~ s/( )/\\$1/g;
+    $app =~ s/(')/\\$1/g;
+
+    $list->{$alias} = $app;
+
+    print "alias $alias=\"open -a $app\"\n";
+
+    return 1;
 }
 
 __END__
 
 =head1 NAME
 
-macaliaser.pl - a script to create aliases for applications on OS X
+macaliaser.pl - a script to create aliases for applications on OSX / MacOS
 
 =head1 SYNOPSIS
 
-	% macaliaser.pl -i /Applications
+    # Generate aliases in /Applications directory
+    % macaliaser.pl -i /Applications
 
-	% macaliaser.pl -i /Applications /Developer
+    # Generate aliases in /Applications directory and Applications directory in users home directory
+    % macaliaser.pl -i /Applications $HOME/Applications
 
-	% macaliaser.pl -h
+    # help
+    % macaliaser.pl -h
 
-	% macaliaser.pl -i /Applications > ~/.aliases
+    # Serialize the generated aliases to a file in you home directory
+    % macaliaser.pl -i /Applications > ~/.aliases
 
-	% macaliaser.pl -l ~/.aliases
-	
-	% macaliaser.pl -l ~/.aliases | grep Mail.app
+    # List know aliases in aliases file
+    % macaliaser.pl -l ~/.aliases
+
+    # List know aliases in aliases file and find Mail.app alias
+    % macaliaser.pl -l ~/.aliases | grep Mail.app
 
 =head1 DESCRIPTION
 
@@ -146,22 +160,22 @@ the from you preferred shell.
 
 I have the following line in my .bash_profile
 
-	source "$HOME/.aliases"
+    source "$HOME/.aliases"
 
 So the script can proces the file with out disturbing my other bash
 settings, apart from the .bach_profile change, I have added the
 following line to my crontab
 
-	0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
-	/Developer/Applications/ > $HOME/.aliases
+    0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
+    /Developer/Applications/ > $HOME/.aliases
 
-Further more I have created a single alias in my .bash_profile for 
+Further more I have created a single alias in my .bash_profile for
 
-	macaliaser.pl -l ~/.aliases
-	
+    macaliaser.pl -l ~/.aliases
+
 In the following way:
 
-	alias aliases = 'macaliaser.pl -l ~/.aliases'
+    alias aliases = 'macaliaser.pl -l ~/.aliases'
 
 =head2 OPTIONS
 
@@ -201,7 +215,7 @@ The tries are done in the following order:
 
 =item 1.
 
-lowercase, name without .app extension 
+lowercase, name without .app extension
 
 =item 2.
 
@@ -232,7 +246,7 @@ jonasbn E<lt>jonasbn@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-macaliaser.pl is (C) 2004-2014 Jonas B. Nielsen (jonasbn)
+macaliaser.pl is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
 =head1 LICENSE
