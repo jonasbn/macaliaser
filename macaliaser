@@ -176,12 +176,6 @@ macaliaser - script to create aliases for applications on OSX / MacOS
     # Serialize the generated aliases to a file in you home directory
     $ macaliaser -i /Applications > ~/.aliases
 
-    # List know aliases in aliases file
-    $ cat ~/.aliases
-
-    # List know aliases in aliases file and find Mail.app alias
-    $ cat ~/.aliases | grep Mail.app
-
 =head1 DESCRIPTION
 
 This script create aliases from all the applications in the directories you scan.
