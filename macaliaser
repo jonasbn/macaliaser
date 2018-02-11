@@ -146,9 +146,21 @@ sub create_alias {
 
 __END__
 
-=head1 NAME
+=pod
 
-macaliaser.pl - a script to create aliases for applications on OSX / MacOS
+=head1 macaliaser
+
+macaliaser - a script to create aliases for applications on OSX / MacOS
+
+=head1 FEATURES
+
+=over
+
+=item * generation of aliases MacOS applications for shell use
+
+=item * black listing og applications for alias generation
+
+=back
 
 =head1 SYNOPSIS
 
@@ -172,7 +184,7 @@ macaliaser.pl - a script to create aliases for applications on OSX / MacOS
 
 =head1 DESCRIPTION
 
-This script creates aliases from all the application in the directories you ask it to scan.
+This script create aliases from all the applications in the directories you scan.
 
 The recommended usage is to put the aliases in a separate file and use
 the from you preferred shell.
@@ -181,12 +193,21 @@ I have the following line in my C<.bash_profile>
 
     source "$HOME/.aliases"
 
-So the script can proces the file with out disturbing my other bash
+So the script can proces the file with out conflicting with other C<bash>
 settings, apart from the C<.bash_profile> change, I have added the
 following line to my C<crontab>
 
     0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
     /Developer/Applications/ > $HOME/.aliases
+
+=head3 Black Listing
+
+You can enable black listing of applications by adding a file named:
+C<blacklist> to C<$HOME/.config/macaliaser/blacklist> like this example:
+
+    /Users/jonasbn/Applications/Chrome Apps.localized/Default pjkljhegncpnkpknbcohdijeoejaedia.app
+
+Do note that the spaces are not escaped.
 
 =head2 OPTIONS
 
@@ -194,11 +215,12 @@ following line to my C<crontab>
 
 =item -i (index)
 
-This indexes the directories listed after C<--> or provided as argument
+This indexes the directories listed after C<--> or provided as arguments to C<-i>
 
 =item -v (verbosity)
 
-This outputs informative messages to C<STDERR>
+This outputs informative messages to C<STDERR> so you can filter it from the generated
+data, which is printed to C<STDOUT>
 
 =back
 
@@ -208,15 +230,17 @@ This outputs informative messages to C<STDERR>
 
 This checks whether a file has a name in the format:
 
-<name>.app
+    «name».app
+
+Do note that names can contain spaces and this is handled.
 
 If this is true it processes the entry further SEE B<suggest>.
 
 =head2 suggest
 
-B<suggest> suggest different aliases for you application, each
-suggestion is tested for existance by B<is_cmd>, so we do not overrule
-any existing commands (like C<mail>).
+B<suggest> suggest different aliases for your applications, each
+suggestion is tested for existance by B<is_cmd>, which relies on L<File::Which>,
+so we do not overrule any existing commands (like C<mail>).
 
 The tries are done in the following order:
 
@@ -224,11 +248,11 @@ The tries are done in the following order:
 
 =item 1.
 
-lowercase, name without .app extension
+lowercase, name without .app extension, example: C<imovie>
 
 =item 2.
 
-lowercase, name with .app extension
+lowercase, name with .app extension, example: C<mailapp>
 
 =item 3.
 
@@ -245,9 +269,12 @@ the original name
 B<cmd_exists> check whether there already is a command with the
 suggested alias in path.
 
+This uses L<File::Which>'s C<which> subroutine, which works like the shell command <which>
+
 =head2 create_alias
 
-B<create_alias> is used to create the actual alias.
+B<create_alias> is used to create the actual alias, bases in the suggestions
+from B<suggest>:
 
 =head1 AUTHOR
 
