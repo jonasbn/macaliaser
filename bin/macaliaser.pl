@@ -27,9 +27,6 @@ if ( $opts{i} ) {
 
     $blacklist = init_blacklist();
 
-    use Data::Dumper;
-    print STDERR Dumper $blacklist;
-
     find( \&is_app, @directories_to_search );
 }
 
