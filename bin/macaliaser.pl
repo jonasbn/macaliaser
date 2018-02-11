@@ -11,7 +11,7 @@ use vars qw(%opts $VERSION);
 
 $VERSION = '0.02';
 
-getopts( 'hvil:', \%opts );
+getopts( 'hvi', \%opts );
 
 my %aliases;
 my $verbose = 0;
@@ -26,16 +26,6 @@ if ( $opts{i} ) {
     my @directories_to_search = @ARGV;
     find( \&is_app, @directories_to_search );
 }
-elsif ( $opts{l} ) {
-    open( FIN, "<$opts{l}" )
-        or die("Unable to open file: $opts{l} - $!");
-    while (<FIN>) {
-        if (m[^alias (\w+).*/(.*\.app)'$]) {
-            print "$1 -> $2\n";
-        }
-    }
-    close(FIN);
-}
 
 exit(0);
 
@@ -44,10 +34,6 @@ sub help {
     print STDERR "\toptions:\n";
     print STDERR "\t-h : this help message\n";
     print STDERR "\t-i <path> : the path to search for applications\n";
-    print STDERR
-        "\t-l <aliases file> : the file which contains your aliases\n";
-    print STDERR
-        "\tthe option prints a simple report, showing existing aliases\n";
 
     exit(0);
 }
@@ -131,22 +117,22 @@ macaliaser.pl - a script to create aliases for applications on OSX / MacOS
 =head1 SYNOPSIS
 
     # Generate aliases in /Applications directory
-    % macaliaser.pl -i /Applications
+    $ macaliaser.pl -i /Applications
 
     # Generate aliases in /Applications directory and Applications directory in users home directory
-    % macaliaser.pl -i /Applications $HOME/Applications
+    $ macaliaser.pl -i /Applications $HOME/Applications
 
     # help
-    % macaliaser.pl -h
+    $ macaliaser.pl -h
 
     # Serialize the generated aliases to a file in you home directory
-    % macaliaser.pl -i /Applications > ~/.aliases
+    $ macaliaser.pl -i /Applications > ~/.aliases
 
     # List know aliases in aliases file
-    % macaliaser.pl -l ~/.aliases
+    $ cat ~/.aliases
 
     # List know aliases in aliases file and find Mail.app alias
-    % macaliaser.pl -l ~/.aliases | grep Mail.app
+    $ cat ~/.aliases | grep Mail.app
 
 =head1 DESCRIPTION
 
@@ -169,14 +155,6 @@ following line to my crontab
     0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
     /Developer/Applications/ > $HOME/.aliases
 
-Further more I have created a single alias in my .bash_profile for
-
-    macaliaser.pl -l ~/.aliases
-
-In the following way:
-
-    alias aliases = 'macaliaser.pl -l ~/.aliases'
-
 =head2 OPTIONS
 
 =over 4
@@ -184,12 +162,6 @@ In the following way:
 =item -i (index)
 
 This indexes the directories listed after --
-
-=item -l (list)
-
-This lists the existing aliases
-
-Useful when you have forgotten a specific alias
 
 =back
 
