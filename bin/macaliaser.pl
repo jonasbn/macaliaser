@@ -39,6 +39,7 @@ sub help {
     print STDERR "Usage: $0 [options]\n";
     print STDERR "\toptions:\n";
     print STDERR "\t-h : this help message\n";
+    print STDERR "\t-v : verbose output to STDERR\n";
     print STDERR "\t-i <path> : the path to search for applications\n";
 
     exit(0);
@@ -174,10 +175,7 @@ macaliaser.pl - a script to create aliases for applications on OSX / MacOS
 
 =head1 DESCRIPTION
 
-I have tried several of the OS X applications, which are supposed to
-speed up access to your applications and I must admin I prefer to use
-the terminal.app to everything. So this script creates aliases from all
-the application in the directories you ask it to scan.
+This script creates aliases from all the application in the directories you ask it to scan.
 
 The recommended usage is to put the aliases in a separate file and use
 the from you preferred shell.
@@ -199,7 +197,11 @@ following line to my crontab
 
 =item -i (index)
 
-This indexes the directories listed after --
+This indexes the directories listed after C<--> or provided as argument
+
+=item -v (verbosity)
+
+This outputs informative messages to C<STDERR>
 
 =back
 
