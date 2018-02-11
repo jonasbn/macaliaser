@@ -1,6 +1,6 @@
 # macaliaser
 
-macaliaser - a script to create aliases for applications on OSX / MacOS
+macaliaser - script to create aliases for applications on OSX / MacOS
 
 # FEATURES
 
@@ -10,22 +10,16 @@ macaliaser - a script to create aliases for applications on OSX / MacOS
 # SYNOPSIS
 
     # Generate aliases in /Applications directory
-    $ macaliaser.pl -i /Applications
+    $ macaliaser -i /Applications
 
     # Generate aliases in /Applications directory and Applications directory in users home directory
-    $ macaliaser.pl -i /Applications $HOME/Applications
+    $ macaliaser -i /Applications $HOME/Applications
 
-    # help
-    $ macaliaser.pl -h
+    # help message
+    $ macaliaser -h
 
     # Serialize the generated aliases to a file in you home directory
-    $ macaliaser.pl -i /Applications > ~/.aliases
-
-    # List know aliases in aliases file
-    $ cat ~/.aliases
-
-    # List know aliases in aliases file and find Mail.app alias
-    $ cat ~/.aliases | grep Mail.app
+    $ macaliaser -i /Applications > ~/.aliases
 
 # DESCRIPTION
 
@@ -42,7 +36,7 @@ So the script can proces the file with out conflicting with other `bash`
 settings, apart from the `.bash_profile` change, I have added the
 following line to my `crontab`
 
-    0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
+    0 12 * * 1 $HOME/bin/macaliaser -i /Applications/ \
     $HOME/Applications/ > $HOME/.aliases
 
 ### Black Listing
@@ -115,11 +109,3 @@ macaliaser.pl is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
 
 macaliaser.pl is free software and is released under the Artistic
 License 2.0.
-
-# POD ERRORS
-
-Hey! **The above document had some coding errors, which are explained below:**
-
-- Around line 233:
-
-    Non-ASCII character seen before =encoding in '«name».app'. Assuming UTF-8

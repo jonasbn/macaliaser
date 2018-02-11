@@ -148,6 +148,8 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 macaliaser
 
 macaliaser - script to create aliases for applications on OSX / MacOS
@@ -191,7 +193,7 @@ So the script can proces the file with out conflicting with other C<bash>
 settings, apart from the C<.bash_profile> change, I have added the
 following line to my C<crontab>
 
-    0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
+    0 12 * * 1 $HOME/bin/macaliaser -i /Applications/ \
     $HOME/Applications/ > $HOME/.aliases
 
 =head3 Black Listing
