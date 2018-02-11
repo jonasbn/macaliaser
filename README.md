@@ -44,7 +44,8 @@ following line to my `crontab`
 You can enable black listing of applications by adding a file named:
 `blacklist` to `$HOME/.config/macaliaser/blacklist` like this example:
 
-    /Users/jonasbn/Applications/Chrome Apps.localized/Default pjkljhegncpnkpknbcohdijeoejaedia.app
+    /Users/jonasbn/Applications/Chrome Apps.localized/Default \
+    pjkljhegncpnkpknbcohdijeoejaedia.app
 
 Do note that the spaces are not escaped.
 
@@ -124,16 +125,16 @@ License 2.0.
 
 Hey! **The above document had some coding errors, which are explained below:**
 
-- Around line 283:
+- Around line 284:
 
     L<> starts or ends with whitespace
 
     alternative text 'https://metacpan.org/pod/File::Which' contains non-escaped | or /
 
-- Around line 285:
+- Around line 286:
 
     alternative text 'https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html' contains non-escaped | or /
 
-- Around line 287:
+- Around line 288:
 
     alternative text 'https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html' contains non-escaped | or /

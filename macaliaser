@@ -201,7 +201,8 @@ following line to my C<crontab>
 You can enable black listing of applications by adding a file named:
 C<blacklist> to C<$HOME/.config/macaliaser/blacklist> like this example:
 
-    /Users/jonasbn/Applications/Chrome Apps.localized/Default pjkljhegncpnkpknbcohdijeoejaedia.app
+    /Users/jonasbn/Applications/Chrome Apps.localized/Default \
+    pjkljhegncpnkpknbcohdijeoejaedia.app
 
 Do note that the spaces are not escaped.
 
