@@ -150,7 +150,7 @@ __END__
 
 =head1 macaliaser
 
-macaliaser - a script to create aliases for applications on OSX / MacOS
+macaliaser - script to create aliases for applications on OSX / MacOS
 
 =head1 FEATURES
 
@@ -165,16 +165,16 @@ macaliaser - a script to create aliases for applications on OSX / MacOS
 =head1 SYNOPSIS
 
     # Generate aliases in /Applications directory
-    $ macaliaser.pl -i /Applications
+    $ macaliaser -i /Applications
 
     # Generate aliases in /Applications directory and Applications directory in users home directory
-    $ macaliaser.pl -i /Applications $HOME/Applications
+    $ macaliaser -i /Applications $HOME/Applications
 
-    # help
-    $ macaliaser.pl -h
+    # help message
+    $ macaliaser -h
 
     # Serialize the generated aliases to a file in you home directory
-    $ macaliaser.pl -i /Applications > ~/.aliases
+    $ macaliaser -i /Applications > ~/.aliases
 
     # List know aliases in aliases file
     $ cat ~/.aliases
