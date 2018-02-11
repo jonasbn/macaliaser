@@ -1,7 +1,5 @@
 #!/usr/bin/env perl
 
-# $Id: macaliaser.pl 1303 2004-05-12 18:21:02Z jonasbn $
-
 use strict;
 use warnings;
 use Getopt::Std;
