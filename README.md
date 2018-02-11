@@ -5,29 +5,26 @@ macaliaser.pl - a script to create aliases for applications on OSX / MacOS
 # SYNOPSIS
 
     # Generate aliases in /Applications directory
-    % macaliaser.pl -i /Applications
+    $ macaliaser.pl -i /Applications
 
     # Generate aliases in /Applications directory and Applications directory in users home directory
-    % macaliaser.pl -i /Applications $HOME/Applications
+    $ macaliaser.pl -i /Applications $HOME/Applications
 
     # help
-    % macaliaser.pl -h
+    $ macaliaser.pl -h
 
     # Serialize the generated aliases to a file in you home directory
-    % macaliaser.pl -i /Applications > ~/.aliases
+    $ macaliaser.pl -i /Applications > ~/.aliases
 
     # List know aliases in aliases file
-    % macaliaser.pl -l ~/.aliases
+    $ cat ~/.aliases
 
     # List know aliases in aliases file and find Mail.app alias
-    % macaliaser.pl -l ~/.aliases | grep Mail.app
+    $ cat ~/.aliases | grep Mail.app
 
 # DESCRIPTION
 
-I have tried several of the OS X applications, which are supposed to
-speed up access to your applications and I must admin I prefer to use
-the terminal.app to everything. So this script creates aliases from all
-the application in the directories you ask it to scan.
+This script creates aliases from all the application in the directories you ask it to scan.
 
 The recommended usage is to put the aliases in a separate file and use
 the from you preferred shell.
@@ -43,25 +40,15 @@ following line to my crontab
     0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
     /Developer/Applications/ > $HOME/.aliases
 
-Further more I have created a single alias in my .bash\_profile for
-
-    macaliaser.pl -l ~/.aliases
-
-In the following way:
-
-    alias aliases = 'macaliaser.pl -l ~/.aliases'
-
 ## OPTIONS
 
 - -i (index)
 
-    This indexes the directories listed after --
+    This indexes the directories listed after `--` or provided as argument
 
-- -l (list)
+- -v (verbosity)
 
-    This lists the existing aliases
-
-    Useful when you have forgotten a specific alias
+    This outputs informative messages to `STDERR`
 
 # FUNCTIONS
 
@@ -91,13 +78,13 @@ The tries are done in the following order:
 **cmd\_exists** check whether there already is a command with the
 suggested alias in path.
 
-## create\_alias - not yet implemented
+## create\_alias
 
 **create\_alias** is used to create the actual alias.
 
 # AUTHOR
 
-jonasbn <jonasbn@cpan.org>
+- jonasbn <jonasbn@cpan.org>
 
 # COPYRIGHT
 
