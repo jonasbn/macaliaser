@@ -269,8 +269,24 @@ This uses L<File::Which>'s C<which> subroutine, which works like the shell comma
 
 =head2 create_alias
 
-B<create_alias> is used to create the actual alias, bases in the suggestions
-from B<suggest>:
+B<create_alias> is used to create the actual alias, based on the suggestions
+from B<suggest>.
+
+Alias are actually just strings in the form of:
+
+    alias somealias="open -a /some/path/to/an/app"
+
+=head1 REFERENCES
+
+=over
+
+=item L<https://metacpan.org/pod/File::Which|MetaCPAN: File::Which >
+
+=item L<https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html|MacOS man page: open command>
+
+=item L<https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html|MacOS man page: bash, contains information on alias command>
+
+=back
 
 =head1 AUTHOR
 
