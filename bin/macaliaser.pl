@@ -6,12 +6,14 @@ use Getopt::Std;
 use File::Which qw(which);
 use File::Find qw(find);
 use vars qw(%opts $VERSION);
+use Env qw($HOME);
 
 $VERSION = '0.02';
 
 getopts( 'hvi', \%opts );
 
 my %aliases;
+my $blacklist;
 my $verbose = 0;
 
 $verbose = 1 if $opts{v};
@@ -22,6 +24,12 @@ if ( $opts{h} or not( keys %opts ) ) {
 
 if ( $opts{i} ) {
     my @directories_to_search = @ARGV;
+
+    $blacklist = init_blacklist();
+
+    use Data::Dumper;
+    print STDERR Dumper $blacklist;
+
     find( \&is_app, @directories_to_search );
 }
 
@@ -36,12 +44,44 @@ sub help {
     exit(0);
 }
 
+sub init_blacklist {
+    my @blacklist = ();
+
+    my $blacklist_path = "$HOME/.config/macaliaser/blacklist";
+
+    if (-e $blacklist_path) {
+        open (BLACKLIST, '<', $blacklist_path);
+        while (<BLACKLIST>) {
+            chomp;
+            push @blacklist, $_;
+        }
+        close BLACKLIST;
+    }
+
+    return \@blacklist;
+}
+
+sub is_blacklisted {
+    my $path = shift;
+
+    if (grep /^$path$/, @{$blacklist}) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 sub is_app {
 
     if (m/^(.*\.app)$/) {
         my $app = $1;
 
         print STDERR "located: $app\n" if $verbose;
+
+        if (is_blacklisted($File::Find::name)) {
+            print STDERR "ignored: $app (blacklisted)\n" if $verbose;
+            return;
+        }
 
         my $try = 0;
         for ( 1 .. 3 ) {
