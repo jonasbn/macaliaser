@@ -177,13 +177,13 @@ This script creates aliases from all the application in the directories you ask 
 The recommended usage is to put the aliases in a separate file and use
 the from you preferred shell.
 
-I have the following line in my .bash_profile
+I have the following line in my C<.bash_profile>
 
     source "$HOME/.aliases"
 
 So the script can proces the file with out disturbing my other bash
-settings, apart from the .bach_profile change, I have added the
-following line to my crontab
+settings, apart from the C<.bash_profile> change, I have added the
+following line to my C<crontab>
 
     0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
     /Developer/Applications/ > $HOME/.aliases
@@ -216,7 +216,7 @@ If this is true it processes the entry further SEE B<suggest>.
 
 B<suggest> suggest different aliases for you application, each
 suggestion is tested for existance by B<is_cmd>, so we do not overrule
-any existing commands (like mail).
+any existing commands (like C<mail>).
 
 The tries are done in the following order:
 
