@@ -103,9 +103,9 @@ Alias are actually just strings in the form of:
 
 # REFERENCES
 
-- [https://metacpan.org/pod/File::Which](https://metacpan.org/pod/MetaCPAN:&#x20;File::Which&#x20;)
-- [https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html](https://metacpan.org/pod/MacOS&#x20;man&#x20;page:&#x20;open&#x20;command)
-- [https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html](https://metacpan.org/pod/MacOS&#x20;man&#x20;page:&#x20;bash,&#x20;contains&#x20;information&#x20;on&#x20;alias&#x20;command)
+- [MetaCPAN: File::Which](https://metacpan.org/pod/File::Which)
+- [MacOS man page: open command](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html)
+- [MacOS man page: bash, contains information on alias command](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html)
 
 # AUTHOR
 
@@ -120,21 +120,3 @@ macaliaser.pl is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
 
 macaliaser.pl is free software and is released under the Artistic
 License 2.0.
-
-# POD ERRORS
-
-Hey! **The above document had some coding errors, which are explained below:**
-
-- Around line 284:
-
-    L<> starts or ends with whitespace
-
-    alternative text 'https://metacpan.org/pod/File::Which' contains non-escaped | or /
-
-- Around line 286:
-
-    alternative text 'https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html' contains non-escaped | or /
-
-- Around line 288:
-
-    alternative text 'https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html' contains non-escaped | or /
