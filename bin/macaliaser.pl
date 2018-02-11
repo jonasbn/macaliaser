@@ -248,13 +248,17 @@ the original name
 B<cmd_exists> check whether there already is a command with the
 suggested alias in path.
 
-=head2 create_alias - not yet implemented
+=head2 create_alias
 
 B<create_alias> is used to create the actual alias.
 
 =head1 AUTHOR
 
-jonasbn E<lt>jonasbn@cpan.orgE<gt>
+=over
+
+=item jonasbn E<lt>jonasbn@cpan.orgE<gt>
+
+=back
 
 =head1 COPYRIGHT
 
