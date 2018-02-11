@@ -43,7 +43,7 @@ settings, apart from the `.bash_profile` change, I have added the
 following line to my `crontab`
 
     0 12 * * 1 $HOME/bin/macaliaser.pl -i /Applications/ \
-    /Developer/Applications/ > $HOME/.aliases
+    $HOME/Applications/ > $HOME/.aliases
 
 ### Black Listing
 
