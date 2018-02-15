@@ -12,7 +12,7 @@ Please file your issue in English, this makes in consumable by others than the a
 
 _Please provide some information on what version of the component used._
 
-```
+```bash
 $ macaliaser --help
 ```
 
@@ -20,7 +20,7 @@ $ macaliaser --help
 
 _Please provide some information on your **Perl** interpreter._
 
-```
+```bash
 $ perl -V
 ```
 
