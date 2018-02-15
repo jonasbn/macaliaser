@@ -5,7 +5,7 @@ perl:
 before_install:
 - git config --global user.name "TravisCI"
 install:
-- cpanm carton
+- cpanm Carton
 - carton install --deployment
 script:
 - carton exec -- prove --verbose
