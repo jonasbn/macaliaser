@@ -107,16 +107,25 @@ Alias are actually just strings in the form of:
 - [MacOS man page: open command](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/open.1.html)
 - [MacOS man page: bash, contains information on alias command](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/bash.1.html)
 
+# ISSUE REPORTING
+
 # AUTHOR
 
 - jonasbn <jonasbn@cpan.org>
 
+# DEVELOPMENT
+
+If you want to contribute to `macaliaser` please read the [Contribution guidelines](https://github.com/jonasbn/macaliaser/blob/master/CONTRIBUTING.md)
+and follow [the pull request guidelines](https://github.com/jonasbn/macaliaser/blob/master/.github/PULL_TEMPLATE.md).
+
 # COPYRIGHT
 
-macaliaser.pl is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
+macaliaser is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
 <jonasbn@cpan.org>
+
+Image used on \[website\](https://jonasbn.github.io/macaliaser/) is under copyright by \[Anthony Garand\]((https://unsplash.com/photos/5sT07dJl65s)
 
 # LICENSE
 
-macaliaser.pl is free software and is released under the Artistic
+macaliaser is free software and is released under the Artistic
 License 2.0.

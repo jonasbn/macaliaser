@@ -312,9 +312,11 @@ and follow L<the pull request guidelines|https://github.com/jonasbn/macaliaser/b
 macaliaser is (C) 2004-2018 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
+Image used on [website](https://jonasbn.github.io/macaliaser/) is under copyright by [Anthony Garand]((https://unsplash.com/photos/5sT07dJl65s)
+
 =head1 LICENSE
 
-macaliaser.pl is free software and is released under the Artistic
+macaliaser is free software and is released under the Artistic
 License 2.0.
 
 =cut
