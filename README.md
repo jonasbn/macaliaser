@@ -39,6 +39,16 @@ following line to my `crontab`
     0 12 * * 1 $HOME/bin/macaliaser -i /Applications/ \
     $HOME/Applications/ > $HOME/.aliases
 
+Do note that `cron` is not necessarily running under the same shell as the user
+so in order to get a proper path set for useful alias suggestions, you might have
+to tweak the environment and emulate a user shell session, like so:
+
+    0 12 * * 1 . $HOME/.bash_profile; $HOME/bin/macaliaser -i /Applications/ \
+    $HOME/Applications/ > $HOME/.aliases
+
+This sources the shell (bash in this case) resource file prior to execution.
+See [Stack Overflow](https://stackoverflow.com/questions/2229825/where-can-i-set-environment-variables-that-crontab-will-use)
+
 ### Black Listing
 
 You can enable black listing of applications by adding a file named:
