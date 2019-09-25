@@ -28,7 +28,7 @@ Coding guidelines are basic, please use:
 
 And if you are really adventurous, you are most welcome to read [my general coding conventions](https://gist.github.com/jonasbn/c2f703c68340384cfc61bb9c38adb2ff) (WIP).
 
-Do note that the repository uses [propot](https://probot.github.io/), so if you write comments formatted as:
+Do note that the repository uses [probot](https://probot.github.io/), so if you write comments formatted as:
 
 ```perl
 # @todo You have an in issue in your heading
